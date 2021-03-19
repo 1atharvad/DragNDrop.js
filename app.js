@@ -1,5 +1,5 @@
 var elementList = {};
-var images = ['img1.jpg', 'img2.jpg', 'img3.jpg'];
+var images = ['img1.jpg', 'img2.jpg', 'img3.jpg', 'img1.jpg', 'img2.jpg', 'img3.jpg', 'img1.jpg', 'img2.jpg', 'img3.jpg', 'img1.jpg', 'img2.jpg', 'img3.jpg'];
 const grid = {
     1: [25],
     2: [13, 12],
@@ -15,25 +15,25 @@ const grid = {
 
 function createDropList(total) {
     const dropzone = document.querySelector('.dropzone');
-    for (var i=1; i<total; i++) {
+    for (var i=0; i<total; i++) {
         document.querySelector('#dropzone-list').innerHTML += dropzone.outerHTML;
+        document.querySelector('#dropzone-list').lastElementChild.removeAttribute('id');
     }
 } 
 
-function createDraggableList(total, images) {
+function createDraggableList(images) {
     const dragItems = document.querySelector('#draggable-0');
-    for (var i=0; i<total; i++) {
+    for (var i=0; i<images.length; i++) {
         document.querySelector('#draggable-items').innerHTML += dragItems.outerHTML.replace('draggable-0', `draggable-${i+1}`);
         document.querySelector(`#draggable-${i+1} img`).src = `images/${images[i]}`;
     }
 } 
 
 function init() {
-    var dropables = 5;
-    var draggables = 3
+    var dropables = 10;
 
     createDropList(dropables);
-    createDraggableList(draggables, images);
+    createDraggableList(images);
 }
 
 function dragNdrop() {
@@ -45,17 +45,35 @@ function dragNdrop() {
     
     document.querySelectorAll("#dropzone-list > div").forEach(element => {
         element.addEventListener('dragover', ev => ev.preventDefault());
+
+        /*element.addEventListener('dragenter', ev => {
+            console.log("enter", ev.target, element)
+            if (ev.target === element) {
+                if (element.querySelector('.empty-zone') !== null) {
+                    element.querySelector('.empty-zone').remove();
+                }
+            }
+        });
+
+        element.addEventListener('dragleave', ev => {
+            console.log("leave", ev.target)
+            if (element.querySelector('.empty-zone') === null) {
+                element.innerHTML += document.querySelector('#dropzone-0').innerHTML;
+            }
+        });*/
     
         element.addEventListener('drop', ev => {
             const data = ev.dataTransfer.getData("text/plain");
     
             ev.preventDefault();
             if (data !== "") {
-                if (element.childNodes.length !== 0) {
-                    if (element.childNodes[0].id !== data) {
+                console.log(element.querySelector('.item-container'))
+                const container = element.querySelector('.item-container')
+                if (container !== null) {
+                    if (container.id !== data) {
                         const replaceElement = searchById(data);
                         if (replaceElement !== null) {
-                            replaceElement.appendChild(element.childNodes[0]);
+                            replaceElement.appendChild(container);
                         } else {
                             return;
                         }
@@ -66,9 +84,10 @@ function dragNdrop() {
             }
         });
     
-        element.addEventListener('dragend', function() {
-            this.querySelector('.d-none').className = 'item-container'
-            this.querySelector('.d-none').className = 'quantity';
+        element.addEventListener('dragend', () => {
+            element.querySelector('.d-none').className = 'item-container'
+            element.querySelector('.d-none').className = 'quantity';
+            setTimeout(() => updateQuantity(), 0);
         });
     });
 }
@@ -115,6 +134,7 @@ function createElementFromId(id) {
         this.parentNode.classList.remove('border-2');
         this.querySelector('.quantity').className = 'd-none';
         this.querySelector('.draggable').classList.add('border-2');
+        this.querySelector('.draggable').classList.add('border-gray');
         this.querySelector('.draggable').style.padding = "7px";
         setTimeout(() => {
             this.parentNode.classList.add('border-2');
@@ -128,10 +148,9 @@ function createElementFromId(id) {
 
 function updateQuantity() {
     var index = 0;
-    document.querySelectorAll('#dropzone-list > div').forEach(element => {
-        if (element.childNodes.length !== 0) {
+    document.querySelectorAll('#dropzone-list > div:not(#dropzone-0)').forEach(element => {
+        if (element.querySelector('.quantity') !== null) {
             var quantity = grid[Object.keys(elementList).length][index];
-
             element.querySelector('.quantity').innerHTML = `x${quantity}`;
             if (element.querySelector('.quantity').classList.length === 2) {
                 element.querySelector('.quantity').className = element.querySelector('.quantity').className.replace(
@@ -149,7 +168,7 @@ function updateQuantity() {
 function getSelectedList() {
     list = {};
     document.querySelectorAll('#dropzone-list > div').forEach(element => {
-        if (element.childNodes.length !== 0) {
+        if (element.querySelector('img') !== null) {
             list[images.indexOf(element.querySelector('img').src.split('images/')[1]) + 1] = parseInt(element.querySelector('.quantity').innerHTML.replace('x', ''));
         }
     });
