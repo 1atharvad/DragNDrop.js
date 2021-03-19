@@ -8,21 +8,28 @@
     <title>Drag & Drop</title>
 </head>
 <body>
-    <div id="dropzone-list" class="dropzone-list">
-        <div class="dropzone border-2" id="dropzone-0">
-            <div class="empty-zone">
-                <div class="plus">
-                    <div class="line1"></div>
-                    <div class="line2"></div>
+    <div class="custom-box">
+        <h1 class="heading">Your Chocolate Box</h1>
+        <div class="subtitle">Drag & Drop your favourite flavour here!</div>
+        <div id="dropzone-list" class="dropzone-list">
+            <div class="dropzone border-2" id="dropzone-0">
+                <div class="empty-zone">
+                    <div class="plus">
+                        <div class="line1"></div>
+                        <div class="line2"></div>
+                    </div>
+                    <div class="name">Add Chocolate</div>
                 </div>
-                <div class="name">Add Chocolate</div>
             </div>
         </div>
     </div>
-    <div id="draggable-items" class="draggable-items">
-        <div id="draggable-0" draggable="true">
-            <img src="" alt="Chocolate Images" class="draggable border-2" draggable="false">
-            <div class="quantity"></div>
+    <div class="draggable-container">
+        <h1 class="heading">Select Your Chocolates</h1>
+        <div id="draggable-items" class="draggable-items">
+            <div id="draggable-0" draggable="true">
+                <img src="" alt="Chocolate Images" class="draggable border-2" draggable="false">
+                <div class="quantity"></div>
+            </div>
         </div>
     </div>
 </body>

@@ -1,9 +1,60 @@
+/*-----------------------------------------------------------Temporary------------------------------------------------------------*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+:root{
+	--navbar-text-color: #cfcd33;
+	--navbar-background-color: #5a291a;
+	--hover-navbar-text-color: #333333;
+	--hover-navbar-background-color: #008cba;
+}
+
+body {
+	font-family: 'Poppins', sans-serif;
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+
+.custom-box {
+    background-color: #a85f34;
+    padding: 1px 0 30px 0;
+}
+
+.custom-box .heading {
+    color: #f0f0f0;
+    text-align: center;
+    letter-spacing: 2px;
+    font-size: 35px;
+    padding: 20px 0;
+    margin: 0 8%;
+}
+
+.custom-box .subtitle {
+    color: #f0f0f0;
+    text-align: center;
+    font-size: 23px;
+    padding-bottom: 20px;
+    margin: 0 8%;
+}
+
+.draggable-container .heading {
+    text-align: center;
+    letter-spacing: 2px;
+    font-size: 35px;
+    padding-top: 30px;
+    margin: 0 8%;
+}
+
 /* Drop Zone*/
 .dropzone-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 50px 10%;
+    margin: 0px 10%;
 }
 
 #dropzone-0 {
@@ -30,7 +81,7 @@
     padding: 15px;
     width: 100px;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .empty-zone {
@@ -51,7 +102,7 @@
     position: absolute;
     height: 4px;
     width: 30px;
-    background-color: black;
+    background-color: #f0f0f0;
 }
 
 .plus .line1 {
@@ -59,9 +110,11 @@
 }
 
 .empty-zone .name {
-    font-size: 19px;
+    font-size: 18px;
     margin: 0 10px;
     text-align: center;
+    color: #f0f0f0;
+    line-height: 22px;
 }
 
 /* Draggable Items */
@@ -107,11 +160,11 @@
 
 /* General */
 .s-digit {
-    padding: 9px 11px;
+    padding: 9px 12px;
 }
 
 .d-digit {
-    padding: 9px 6px;
+    padding: 9px 9px;
 }
 
 .d-none {
@@ -123,7 +176,7 @@
 }
 
 .border-2 {
-    border: 2px solid black;
+    border: 2px solid #f0f0f0;
     border-radius: 8px;
 }
 
