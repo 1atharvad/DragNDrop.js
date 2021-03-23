@@ -19,6 +19,18 @@ function createDropList(total) {
         document.querySelector('#dropzone-list').innerHTML += dropzone.outerHTML;
         document.querySelector('#dropzone-list').lastElementChild.removeAttribute('id');
     }
+    document.querySelectorAll('#dropzone-list > div').forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            if (this.querySelector('.product-name') !== null) {
+                this.querySelector('.product-name').style.display = 'flex';
+            }
+        });
+        element.addEventListener('mouseleave', function() {
+            if (this.querySelector('.product-name') !== null) {
+                //this.querySelector('.product-name').style.display = 'none';
+            }
+        });
+    });
 } 
 
 function createDraggableList(images) {
@@ -27,6 +39,14 @@ function createDraggableList(images) {
         document.querySelector('#draggable-items').innerHTML += dragItems.outerHTML.replace('draggable-0', `draggable-${i+1}`);
         document.querySelector(`#draggable-${i+1} img`).src = `images/${images[i]}`;
     }
+    document.querySelectorAll('#draggable-items > div').forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            this.querySelector('.product-name').style.display = 'flex';
+        });
+        element.addEventListener('mouseleave', function() {
+            this.querySelector('.product-name').style.display = 'none';
+        });
+    });
 } 
 
 function init() {
@@ -40,6 +60,7 @@ function dragNdrop() {
     document.querySelectorAll("#draggable-items > div").forEach(element => {
         element.addEventListener('dragstart', ev => {
             ev.dataTransfer.setData("text/plain", ev.target.id);
+            element.querySelector('.product-name').style.display = 'none';
         });
     });
     
@@ -67,7 +88,6 @@ function dragNdrop() {
     
             ev.preventDefault();
             if (data !== "") {
-                console.log(element.querySelector('.item-container'))
                 const container = element.querySelector('.item-container')
                 if (container !== null) {
                     if (container.id !== data) {
@@ -136,6 +156,7 @@ function createElementFromId(id) {
         this.querySelector('.draggable').classList.add('border-2');
         this.querySelector('.draggable').classList.add('border-gray');
         this.querySelector('.draggable').style.padding = "7px";
+        element.querySelector('.product-name').style.display = 'none';
         setTimeout(() => {
             this.parentNode.classList.add('border-2');
             element.querySelector('.draggable').classList.remove('border-2');
