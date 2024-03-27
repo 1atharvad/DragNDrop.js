@@ -1,0 +1,7 @@
+__pycache__
+node_modules
+**/index.min.**
+**/**.pyc
+dist/
+.DS_Store
+.vscode

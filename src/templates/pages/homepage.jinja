@@ -1,0 +1,35 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+  <div class="custom-box">
+    <h2 class="heading">Your Chocolate Box</h2>
+    <div class="subtitle">Drag & Drop your favorite flavour here!</div>
+    <div id="dropzone-list" class="dropzone-list">
+      {% for item in range(5) %}
+        <div class="dropzone border-2" id="dropzone-0">
+          <div class="empty-zone">
+            <div class="plus">
+              <div class="line1"></div>
+              <div class="line2"></div>
+            </div>
+            <div class="name">Add Chocolate</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="draggable-container">
+    <h2 class="heading">Select Your Chocolates</h2>
+    <div id="draggable-items" class="draggable-items">
+      {% for image in content.chocolate_images %}
+        <div class="product-details">
+          <div class="draggable-item-wrapper" id="draggable-{{loop.index}}" draggable="true">
+            <img class="draggable border-2" draggable="false" src="{{image.src}}" alt="{{image.alt_text}}">
+          </div>
+          <div class="product-name">{{image.name}}</div>
+          <div class="quantity"></div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
